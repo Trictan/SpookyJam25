@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:		
+	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x*MOUSE_SENS))
 		spring_arm.rotate_x(deg_to_rad(-event.relative.y*MOUSE_SENS))
-		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -89, 89)
+		spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-89), deg_to_rad(89))
