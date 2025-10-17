@@ -51,12 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50977325, 0)
 current = true
 
 [node name="Boxes" type="Node3D" parent="."]
-visible = false
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="Boxes"]
-transform = Transform3D(8.375084, 0, 0, 0, 0.4069019, 0, 0, 0, 8.375084, 4.187542, -0.626533, 4.187542)
-use_collision = true
-size = Vector3(41.597656, 1, 8.46875)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Boxes"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.20937274, 3.1545656, -4.1638174)
@@ -77,6 +71,7 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.20937274, 3.1545656, 
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -7.4497743, 3.1545656, -0.16000058)
 
 [node name="RoomCollisions" type="CSGCombiner3D" parent="."]
+use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="RoomCollisions"]
 size = Vector3(10, 0.25, 10)
