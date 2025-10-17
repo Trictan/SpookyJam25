@@ -1,51 +1,39 @@
-extends RigidBody3D
+extends CharacterBody3D
 
+@onready var spring_arm: Node3D = get_node("SpringArm3D")
+@onready var cam: Node3D = spring_arm.get_node("Camera")
 
-@onready var cam: Node3D = get_node("Camera")
+const SPEED: float = 5.0
+const JUMP_VELOCITY: float = 3.0
+const MOUSE_SENS: float = 0.25
+var grav = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var walk_force: int = 15
-var jump_force: int = 3
-var walk_slowdown: int = 15
-var max_speed: int = 10
-
+#var grav = 9.8
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _physics_process(delta: float) -> void:
-	var got_input = false
-	var speed = (linear_velocity*Vector3(1,0,1)).length()
-	if speed < max_speed:
-		if Input.is_action_pressed("forward"):
-			got_input = true
-			var forward = -transform.basis.z
-			self.apply_central_force(forward*walk_force)
-		if Input.is_action_pressed("backward"):
-			got_input = true
-			var backward = transform.basis.z
-			self.apply_central_force(backward*walk_force)
-		if Input.is_action_pressed("left"):
-			got_input = true
-			var forward = -transform.basis.x
-			self.apply_central_force(forward*walk_force)
-		if Input.is_action_pressed("right"):
-			got_input = true
-			var forward = transform.basis.x
-			self.apply_central_force(forward*walk_force)
-	if Input.is_action_just_pressed("jump"):
-		self.apply_central_impulse(Vector3(0,1,0)*jump_force)
-	if not got_input:
-		apply_central_force(-linear_velocity*walk_slowdown*Vector3(1,0,1))
-
+	if not is_on_floor():
+		velocity.y -= grav*delta
+		
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 	
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		self.rotate(Vector3(0,1,0), -event.relative.x*0.01)
+	var input_dir = Input.get_vector("left", "right", "forward", "backward")
+	var dir = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if dir:
+		velocity.x = dir.x*SPEED
+		velocity.z = dir.z*SPEED
+	else:
+		velocity.x = move_toward(velocity.x,0,SPEED)
+		velocity.z = move_toward(velocity.z,0,SPEED)
+	
+	move_and_slide()
 
-		cam.rotate(Vector3(1,0,0), -event.relative.y*0.01)
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:		
+		rotate_y(deg_to_rad(-event.relative.x*MOUSE_SENS))
+		spring_arm.rotate_x(deg_to_rad(-event.relative.y*MOUSE_SENS))
+		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -89, 89)
