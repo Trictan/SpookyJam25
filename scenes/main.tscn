@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://trcq7pcjr0" path="res://scenes/computer.tscn" id="4_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cn3i4aumkn6wa" path="res://textures/IMG_3075 (1).png" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://wcqr3bvl857d" path="res://scenes/chute.tscn" id="6_tefeu"]
-[ext_resource type="Shader" uid="uid://cixg8due0jigi" path="res://scenes/postp.gdshader" id="7_o6xl0"]
+[ext_resource type="Shader" path="res://scenes/postp.gdshader" id="7_o6xl0"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
@@ -153,6 +153,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5492939, 0, 0, 0, 0.5, 1.3673365, -0.242
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource("ShaderMaterial_tipki")
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,6 +1,7 @@
 extends Node3D
 
 var turned_on = false
+var turning_on = false
 
 @export_multiline var idle_text: String
 @export_multiline var new_task_text: String
@@ -15,9 +16,11 @@ var state: States = States.idle
 
 func _process(_delta: float) -> void:
 	if not turned_on:
-		$Label3D.visible = (position-Globals.player_position).length() < 3
+		if not turning_on:
+			$Label3D.visible = (position-Globals.player_position).length() < 3
 		if $Label3D.visible and Input.is_action_just_pressed("start_computer"):
 			$Label3D.visible = false
+			turning_on = true
 			start()
 		return
 	
