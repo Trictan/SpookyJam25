@@ -19,27 +19,22 @@ viewport_path = NodePath("SubViewport")
 
 [node name="Computer" type="Node3D"]
 script = ExtResource("1_7ikar")
+idle_text = "Do your work"
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 size = Vector2i(460, 280)
 
-[node name="Label" type="Label" parent="SubViewport"]
+[node name="computer_text" type="Label" parent="SubViewport"]
 modulate = Color(0.32005614, 0.92384607, 0, 1)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -40.0
-offset_right = 150.0
-offset_bottom = 18.999908
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 440.0
+offset_bottom = 245.0
 theme_override_fonts/font = ExtResource("2_tjrug")
 theme_override_font_sizes/font_size = 30
-text = "NEW TASK AVAILABLE!"
+autowrap_mode = 1
+uppercase = true
 
 [node name="terminal_with_mats" parent="." instance=ExtResource("1_om4aa")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.82833964, 0.0032845736, -0.58680576)
@@ -51,6 +46,11 @@ texture = SubResource("ViewportTexture_7sc3q")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0320883, 0.70778394, 0.11020169)
-visible = false
 billboard = 1
 text = "[E]"
+
+[node name="focus_position" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36919153, 0.48307908, 1.1186899)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37636697, 0.47994512, 1.1080214)

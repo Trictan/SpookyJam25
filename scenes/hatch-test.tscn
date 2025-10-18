@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://do0s5fu7jljw0"]
+[gd_scene load_steps=11 format=3 uid="uid://do0s5fu7jljw0"]
 
 [ext_resource type="Script" uid="uid://c8m7co5c5uduq" path="res://hatch1.gd" id="1_b636c"]
 [ext_resource type="Script" uid="uid://d23trr7wuo0ab" path="res://scenes/player.gd" id="2_kohjg"]
+[ext_resource type="Script" uid="uid://dywddhwgvm8e0" path="res://scenes/object_grab.gd" id="3_epwex"]
+[ext_resource type="Script" uid="uid://govaih2g2jo1" path="res://scenes/pickable.gd" id="3_kohjg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b636c"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,6 +22,8 @@ glow_enabled = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4mc3"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_epwex"]
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -29,7 +33,7 @@ environment = SubResource("Environment_epwex")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Hatch" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1856225, 3.808404)
 use_collision = true
 size = Vector3(1, 1, 0.14648438)
@@ -51,7 +55,9 @@ spring_length = 0.0
 
 [node name="Camera" type="Camera3D" parent="Player/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50977325, 0)
+cull_mask = 1047555
 current = true
+script = ExtResource("3_epwex")
 
 [node name="RoomCollisions" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -59,3 +65,19 @@ use_collision = true
 [node name="Floor" type="CSGBox3D" parent="RoomCollisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67181396, 0, -0.0045166016)
 size = Vector3(11.343628, 0.25, 15.5686035)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["Pickable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6051416, 3.2531273, 0)
+collision_layer = 3
+collision_mask = 3
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("3_kohjg")
+
+[node name="Pickable" type="CSGBox3D" parent="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_epwex")
+
+[connection signal="input_event" from="RigidBody3D" to="RigidBody3D" method="_on_input_event"]
