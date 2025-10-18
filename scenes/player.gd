@@ -13,6 +13,10 @@ var grav = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready() -> void:
 	pass
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Globals.player_position = position
+
+func _process(_delta: float) -> void:
+	Globals.player_position = position
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
