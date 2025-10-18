@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://trcq7pcjr0"]
+
+[ext_resource type="Script" uid="uid://bdtru80atai0q" path="res://scenes/computer.gd" id="1_7ikar"]
+[ext_resource type="PackedScene" uid="uid://b6o4gbtjf8nti" path="res://models/terminal_with_mats.glb" id="1_om4aa"]
+[ext_resource type="Shader" uid="uid://drnio62rb5sjg" path="res://computer.gdshader" id="2_8pqrt"]
+[ext_resource type="FontFile" uid="uid://b1ddwx73k50as" path="res://Tiny5-Regular.ttf" id="2_tjrug"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8pqrt"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8pqrt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_8pqrt")
+shader_parameter/tex = SubResource("ViewportTexture_8pqrt")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7sc3q"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Computer" type="Node3D"]
+script = ExtResource("1_7ikar")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(460, 280)
+
+[node name="Label" type="Label" parent="SubViewport"]
+modulate = Color(0.32005614, 0.92384607, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 18.999908
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_tjrug")
+theme_override_font_sizes/font_size = 30
+text = "NEW TASK AVAILABLE!"
+
+[node name="terminal_with_mats" parent="." instance=ExtResource("1_om4aa")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.82833964, 0.0032845736, -0.58680576)
+
+[node name="Sprite3D" type="Sprite3D" parent="terminal_with_mats"]
+transform = Transform3D(0.5899999, 0, 0, 0, 0.5874965, 0.05429356, 0, -0.05429356, 0.5874965, 1.3097993, 0.9982189, 1.0417242)
+material_override = SubResource("ShaderMaterial_8pqrt")
+texture = SubResource("ViewportTexture_7sc3q")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0320883, 0.70778394, 0.11020169)
+visible = false
+billboard = 1
+text = "[E]"
