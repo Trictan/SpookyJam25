@@ -120,6 +120,11 @@ spot_angle_attenuation = 3.8637474
 
 [node name="Computer" parent="." instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.7100902, 1.8787603, 3.5640943)
+idle_text = "idle"
+new_task_text = "new task available!
+press [enter] to accept"
+completed_confirm_text = "have you finished your task? 
+confirm by pressing [enter]"
 
 [node name="chute" parent="." instance=ExtResource("5_tbgi4")]
 transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, -2.0350661, 2.1098342, -2.5256433)
