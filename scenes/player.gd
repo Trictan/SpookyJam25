@@ -37,7 +37,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		Globals.player_is_rotating_object = event.is_pressed() and Globals.grabbedObject
+	
+	if event is InputEventMouseMotion and not Globals.player_is_rotating_object:
 		rotate_y(deg_to_rad(-event.relative.x*MOUSE_SENS))
 		spring_arm.rotate_x(deg_to_rad(-event.relative.y*MOUSE_SENS))
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-89), deg_to_rad(89))
