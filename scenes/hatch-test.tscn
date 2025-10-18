@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://do0s5fu7jljw0"]
+
+[ext_resource type="Script" uid="uid://c8m7co5c5uduq" path="res://hatch1.gd" id="1_b636c"]
+[ext_resource type="Script" uid="uid://d23trr7wuo0ab" path="res://scenes/player.gd" id="2_kohjg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b636c"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_kohjg"]
+sky_material = SubResource("ProceduralSkyMaterial_b636c")
+
+[sub_resource type="Environment" id="Environment_epwex"]
+background_mode = 2
+sky = SubResource("Sky_kohjg")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_epwex"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4mc3"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_epwex")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1856225, 3.808404)
+use_collision = true
+size = Vector3(1, 1, 0.14648438)
+script = ExtResource("1_b636c")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(-0.9772607, 0, -0.21204127, 0, 1, 0, 0.21204127, 0, -0.9772607, 0, 2.4531543, 0)
+script = ExtResource("2_kohjg")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_epwex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1.132, 0, 0, 0, 1.132, 0, 0, 0, 1.132, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_g4mc3")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player"]
+spring_length = 0.0
+
+[node name="Camera" type="Camera3D" parent="Player/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50977325, 0)
+current = true
+
+[node name="RoomCollisions" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="RoomCollisions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67181396, 0, -0.0045166016)
+size = Vector3(11.343628, 0.25, 15.5686035)
