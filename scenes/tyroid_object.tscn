@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o1uejit6dgyt"]
+
+[ext_resource type="Script" uid="uid://coo541bk6by76" path="res://tyroid_object.gd" id="1_w44ho"]
+
+[node name="TyroidObject" type="Node3D"]
+script = ExtResource("1_w44ho")
