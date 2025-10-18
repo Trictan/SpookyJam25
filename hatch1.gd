@@ -1,16 +1,28 @@
 extends CSGBox3D
 
-var tween = create_tween()
+var open_pos = Vector3(0, 2.528, 3.808)
+var closed_pos = Vector3(0, 1.186, 3.808)
+var duration = 0.5
+
+var min_radius = 2
+
+var opening = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Define the target position and duration
-	var target_position = Vector3(0, 2.528, 3.808)
-	var duration = 2.0
-
-	# Tween the position property over 2 seconds
-	tween.tween_property(self, "position", target_position, duration)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	
+	var shouldOpen = ((Globals.player_position - self.position)*Vector3(1,0,1)).length() < min_radius
+	
+	if shouldOpen and (not opening):
+		var tween = create_tween()
+		tween.tween_property(self, "position", open_pos, duration)
+		opening = true
+	if (not shouldOpen) and opening:
+		var tween = create_tween()
+		tween.tween_property(self, "position", closed_pos, duration)
+		opening = false
+	

@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0jwjugd085t1"]
+[gd_scene load_steps=11 format=3 uid="uid://b0jwjugd085t1"]
 
 [ext_resource type="Script" uid="uid://d0kag1bruj247" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://d23trr7wuo0ab" path="res://scenes/player.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://dc852tr1t2gqn" path="res://models/table(1).gltf" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://trcq7pcjr0" path="res://scenes/computer.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cuns0hc0k5wyx" path="res://scenes/chute.glb" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://cn3i4aumkn6wa" path="res://textures/IMG_3075 (1).png" id="4_tefeu"]
 
 [sub_resource type="Environment" id="Environment_0wfyh"]
 background_mode = 2
@@ -18,6 +18,9 @@ radius = 0.2553711
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sugp2"]
 size = Vector3(12.891205, 0.7684326, 6.5135193)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
+albedo_texture = ExtResource("4_tefeu")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_0wfyh")
@@ -33,7 +36,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 1.0
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4531543, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4007006, 0)
 script = ExtResource("1_o5qli")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Player"]
@@ -88,7 +91,7 @@ use_collision = true
 size = Vector3(11, 0.25, 11)
 
 [node name="Floor2" type="CSGBox3D" parent="RoomCollisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.360151, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.0495014, 0)
 size = Vector3(11, 0.25, 11)
 
 [node name="wall" type="CSGBox3D" parent="RoomCollisions"]
@@ -102,13 +105,14 @@ size = Vector3(15.267578, 0.25, 10)
 [node name="wall3" type="CSGBox3D" parent="RoomCollisions"]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 5.2282626e-15, 2.7363281, -5)
 size = Vector3(15.472656, 0.25, 10)
+material = SubResource("StandardMaterial3D_choun")
 
 [node name="wall4" type="CSGBox3D" parent="RoomCollisions"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 3.3273926, 5)
 size = Vector3(10, 0.25, 16.654785)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.2663836, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.1001166, 2.939244, 0.9004384)
 light_color = Color(0.85417604, 0.76193374, 0.53637207, 1)
 light_energy = 4.0
 light_indirect_energy = 1.115
