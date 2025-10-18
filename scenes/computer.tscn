@@ -19,7 +19,11 @@ viewport_path = NodePath("SubViewport")
 
 [node name="Computer" type="Node3D"]
 script = ExtResource("1_7ikar")
-idle_text = "Do your work"
+idle_text = "idle."
+new_task_text = "new box available for retrieval!
+press [enter] to open hatch."
+completed_confirm_text = "have you completed your task?
+press [enter] to confirm."
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -46,6 +50,7 @@ texture = SubResource("ViewportTexture_7sc3q")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0320883, 0.70778394, 0.11020169)
+visible = false
 billboard = 1
 text = "[E]"
 
