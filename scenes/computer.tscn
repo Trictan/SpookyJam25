@@ -56,6 +56,3 @@ text = "[E]"
 
 [node name="focus_position" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36919153, 0.48307908, 1.1186899)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37636697, 0.47994512, 1.1080214)

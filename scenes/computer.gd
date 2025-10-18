@@ -13,11 +13,15 @@ enum States {
 	completed_confirm
 }
 var state: States = States.idle
-
+var prev_player_close = false
+var player_close = false
 func _process(_delta: float) -> void:
+	prev_player_close = player_close
+	player_close = (position-Globals.player_position).length() < 3
+	
 	if not turned_on:
 		if not turning_on:
-			$Label3D.visible = (position-Globals.player_position).length() < 3
+			$Label3D.visible = player_close
 		if $Label3D.visible and Input.is_action_just_pressed("start_computer"):
 			$Label3D.visible = false
 			turning_on = true
