@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://wcqr3bvl857d"]
+[gd_scene load_steps=24 format=4 uid="uid://wcqr3bvl857d"]
 
+[ext_resource type="Script" uid="uid://1kirp2dw5k0u" path="res://scenes/chute.gd" id="1_4bhm1"]
 [ext_resource type="Texture2D" uid="uid://dbn0vehkirh3k" path="res://chute_IMG_3074.png" id="1_x627s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6inwd"]
@@ -304,6 +305,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_c6tlu")
 
 [node name="Chute" type="Node3D"]
+script = ExtResource("1_4bhm1")
 
 [node name="Bolts3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.58825326, 0, 0, 0, 13.298652, 0, 0, 0, 0.58825326, -0.070008755, 10.968119, 3.1222048)
